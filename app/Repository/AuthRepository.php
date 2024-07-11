@@ -42,7 +42,7 @@ class AuthRepository implements AuthRepositoryContract
 
         $requestedUser->tokens()->delete();
 
-        $token = $requestedUser->createToken(name: "login-api-token-{$requestedUser->id}", expiresAt: now()->addDay());
+        $token = $requestedUser->createToken(name: "login-api-token-{$requestedUser->id}", expiresAt: now()->addHours(value: 5));
 
         return sendSuccessData(
             data: [
