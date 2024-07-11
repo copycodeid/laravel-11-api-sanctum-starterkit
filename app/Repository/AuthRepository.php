@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Contract\AuthRepositoryContract;
+use App\Http\Resources\Auth\AuthenticatedUserResource;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class AuthRepository implements AuthRepositoryContract
 {
@@ -25,6 +27,31 @@ class AuthRepository implements AuthRepositoryContract
 
         return sendSuccessData(
             message: 'User has been created successfully!',
+        );
+    }
+
+    public function login(array $data): array
+    {
+        $requestedUser = $this->baseQuery->where('email', $data['email'])->first();
+
+        if (!$requestedUser || !Hash::check($data['password'], $requestedUser->password)) {
+            throw ValidationException::withMessages([
+                'email' => __('auth.failed'),
+            ]);
+        }
+
+        $requestedUser->tokens()->delete();
+
+        $token = $requestedUser->createToken(name: "login-api-token-{$requestedUser->id}", expiresAt: now()->addDay());
+
+        return sendSuccessData(
+            data: [
+                'user' => new AuthenticatedUserResource($requestedUser),
+                'access_token' => [
+                    'expires_at' => $token->accessToken->expires_at,
+                    'token' => $token->plainTextToken,
+                ],
+            ]
         );
     }
 }
