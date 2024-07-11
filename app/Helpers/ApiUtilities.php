@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('sendSuccessData')) {
+if (! function_exists('sendSuccessData')) {
     function sendSuccessData(mixed $data = null, ?string $message = 'Success'): array
     {
         if ($data != null) {
@@ -16,7 +16,7 @@ if (!function_exists('sendSuccessData')) {
     }
 }
 
-if (!function_exists('sendFailedData')) {
+if (! function_exists('sendFailedData')) {
     function sendFailedData(mixed $data = null, ?string $message = 'Failed'): array
     {
         $result = [

@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('firstWord')) {
+if (! function_exists('firstWord')) {
     /**
      * Take first word from passed value
      *
@@ -15,7 +15,7 @@ if (!function_exists('firstWord')) {
     }
 }
 
-if (!function_exists('firstLetter')) {
+if (! function_exists('firstLetter')) {
     /**
      * Take first letter from passed value
      *
@@ -30,7 +30,7 @@ if (!function_exists('firstLetter')) {
     }
 }
 
-if (!function_exists('generateUsername')) {
+if (! function_exists('generateUsername')) {
     /**
      * Take first letter from passed value
      *
@@ -47,7 +47,7 @@ if (!function_exists('generateUsername')) {
     }
 }
 
-if (!function_exists('generateSlug')) {
+if (! function_exists('generateSlug')) {
     /**
      * Take first letter from passed value
      *

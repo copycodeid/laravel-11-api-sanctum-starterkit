@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Contract\AuthRepositoryContract;
-use App\Http\Resources\Auth\AuthenticatedUserResource;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +20,7 @@ class AuthRepository implements AuthRepositoryContract
             'name' => $name = $data['name'],
             'username' => generateUsername($name),
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
         ]);
 
         return sendSuccessData(
