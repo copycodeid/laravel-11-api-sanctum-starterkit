@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use F9Web\ApiResponseHelpers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class LogoutController extends Controller
 {
-    public function __invoke(Request $request)
+    use ApiResponseHelpers;
+
+    public function __invoke(Request $request): JsonResponse
     {
-        //
+        $request->user()->tokens()->delete();
+
+        return $this->respondWithSuccess(
+            sendSuccessData(
+                message: 'Logout Success'
+            ),
+        );
     }
 }
