@@ -34,7 +34,7 @@ class AuthRepository implements AuthRepositoryContract
     {
         $requestedUser = $this->baseQuery->where('email', $data['email'])->first();
 
-        if (!$requestedUser || !Hash::check($data['password'], $requestedUser->password)) {
+        if (! $requestedUser || ! Hash::check($data['password'], $requestedUser->password)) {
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
