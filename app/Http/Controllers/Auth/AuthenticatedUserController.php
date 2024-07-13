@@ -15,7 +15,7 @@ class AuthenticatedUserController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         return $this->respondWithSuccess(
-            contents: ['user' => new AuthenticatedUserResource($request->user())],
+            contents: ['user' => new AuthenticatedUserResource($request->user('sanctum'))],
         );
     }
 }
